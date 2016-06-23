@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Free Code Camp Challenge - Pomodoro Clock</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+    crossorigin="anonymous">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div class="container" id="site-wrapper">
+    <div class="page-header">
+      <h1>Pomodoro Clock</h1>
+    </div>
+    <div class="row" id="controls-row">
+      <div class="col-md-1 col-md-offset-4 col-sm-2 col-sm-offset-2 col-xs-4 text-right">
+        <button type="button" id="start-pause-button" class="btn btn-default btn-round" aria-label="Start / Pause">
+            <span class="glyphicon glyphicon-play fa-lg" aria-hidden="true"></span>
+          </button>
+      </div>
+      <div class="col-md-2 col-xs-4 text-center">
+        <button type="button" id="option-button" class="btn btn-default btn-round" data-toggle="collapse" data-target="#clock-options"
+          aria-label="Options" aria-expanded="false" aria-controls="clock-options">
+            <span class="glyphicon glyphicon-cog fa-lg" aria-hidden="true"></span>
+          </button>
+      </div>
+      <div class="col-md-1 col-sm-2 col-xs-4 text-left">
+        <button type="button" id="reset-button" class="btn btn-default btn-round" aria-label="Reset">
+            <span class="glyphicon glyphicon-repeat fa-lg" aria-hidden="true"></span>
+          </button>
+      </div>
+    </div>
+    <div class="row collapse" id="clock-options">
+      <div class="col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" id="clock-options-inner">
+        <div class="row">
+          <div class="col-lg-3 col-xs-6 text-center">
+            Work Time
+          </div>
+          <div class="col-lg-3 col-lg-offset-6 col-xs-6 text-center">
+            Break Time
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-1 col-xs-2 option-container text-right">
+            <button type="button" class="btn btn-minutes" id="work-minus" aria-label="Decrease">
+                <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+              </button>
+          </div>
+          <div class="col-lg-1 col-xs-2 text-center">
+            <span class="options-minutes" id="work-minutes">25</span>
+          </div>
+          <div class="col-lg-1 col-xs-2 option-container text-left">
+            <button type="button" class="btn btn-minutes" id="work-plus" aria-label="Increase">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+              </button>
+          </div>
+          <div class="col-lg-1 col-lg-offset-6 col-xs-2 text-right">
+            <button type="button" class="btn btn-minutes" id="break-minus" aria-label="Decrease">
+                <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+              </button>
+          </div>
+          <div class="col-lg-1 col-xs-2 text-center">
+            <span class="options-minutes" id="break-minutes">5</span>
+          </div>
+          <div class="col-lg-1 col-xs-2 text-left text-left">
+            <button type="button" class="btn btn-minutes" id="break-plus" aria-label="Increase">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+              </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-3 col-xs-6 text-center">
+            Minutes
+          </div>
+          <div class="col-lg-3 col-lg-offset-6 col-xs-6 text-center">
+            Minutes
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="clock-row">
+      <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 text-center">
+        <p id="clock">
+          <span id="clock-minutes">25</span>
+          <span id="clock-separator">:</span>
+          <span id="clock-seconds">00</span>
+        </p>
+      </div>
+      <div class="col-xs-12 text-center xyz">
+        <span id="clock-indicator"></span>
+      </div>
+    </div>
+    <div class="row" id="message-row">
+      <div class="col-sm-6 col-sm-offset-3 text-center" id="clock-message">
+      </div>
+    </div>
+    <div class="row" id="description-row">
+    </div>
+  </div>
+  <audio id="donesound" src="data:audio/mp3;base64,SUQzAwAAAAAAD1RDT04AAAAFAAAAKDEyKf/6ksBK2QAAAAABLgAAACAXgGOQYAAFBAQAAARPsASxAABUFEUORtJAQAHQe2tDYdIDRgDGguLo2/l//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////xddtdrbbIwAX9LuG4GEp8xLANABAdNwMCmcABnoI7RniwXgPUJAdzWVD5KlvZ4EqvXkYJwwvs0C8mJqL78RnCS6VfBpSKMVtZUPm+iBieAsi08iX8hzetcP/zOv8PP7JLskkskkjaBtmGmWPLLHd4wDAo+k0YQkDGyOAIDURN1cQMAaILW12Kg5YMMiqbTrITo44oVeHPEiCoXOfx+GfwND6gD8uXNwJSPS28N34g1lS9uDXZPHIfI4IGKCWbsXJaowcKtyaIdrqwUHUCYqDwO1Ql7/+pLA1xO+gBVAFx9sMGJhe5HktaelKRUIgNzhbuLBLOCm+2Xj07pN8pfVr9fXtr22mbL2vYr9O/5uxC/+dTvY7b0cY2cp3zNJg6m59aN22Or/jvD3//4YGR8w8PEBK6S3e3a1pAEgAhHTDyYKG5jZEYEVmLuR72waELmAhRkAEHBakX7ACMfY4Y82HBjKjRgJIQYOPFwMkvHtxqihi1ZhlpkVxsgD6QC9zX12QCYwguF42vyt4mMpSGIEEwJrEJLPgQUh+IjQQ8MSDQ/cZRQEAmuemEngtdrDSGQkwZtbAdgsm7zQGDv2XsJRQE+ABGFtuwSnZw3dOZJFLsvYQgoPGgYjEoI0umsvOBCBQVLtpcPSzurDW4GeyKu0YAyYKA9kDLLsQppA/6qBfh/5izndmoqmO/zyQ/Ws2JXJJa78oxv2KZrklgKTRu5y27c9OQ3B7XI/I7DpyegpLdJeduUW7G6S7f1Yr4Xq9vDfYhRYbqY09y9K7lvmX0qEw6q57LvWjU+KgqwylSwaDBuJuJLFXufhHRDWzPTow202JFQRXbKr//qSwPoF/4AXTVUvrOGNnGwyJ7W9ZbViXcmkT6b/q2Oo7Npay3+b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2jAHRn4fhAGDSEJMaHz5SeFpG3CL90RAKZ6KdWWG2Ur8w0i33KXS19RkUMxCX6jMq3nu5LUXigHPevxZtG2sAFhwXnlRcNWGFvQ9sAIQK9ia7SyTdWPpHMKMG9wGAsNcd2Z5MlmLqLYeKRxBnTrSifkL/0k5O0WdO3kpfaSwXb/uX/3DnaCRbugq0ccb6JheSgoAAikp/s2AX/lsPIpBcJRMaOY8CI6mFVAKDn9rVBQUrEXgyrnDtU2BQP/6ksBAsLAAE+zlS03rK3JZnCm1neVurd7DeDIwyVF71/+6+qqkVha5f/FgrhOuQgqsliPyEmKsofeMUAOvX/AbwCo8EJVRFsIhqUaY0w5xoCfZYzXpyXs4beFKPy2OyXCdUeh1vX2xcBw4q4sTid/3oMkyqCAsMtl1qXqQZNf//////////////////////////////////5dABSTl/2jAQGucX1DAC3DXXgLkv8dbBGI+dFmVgZECIr2X5NwgW1zTZ/dFTTRAImGAkpdqrPSDVS+jITQtar7zdSB36RfaXBLOXzVp3Sy9kZoM6zsssWI4S7NPwBCqkUuZ1AClMy3V4YcbjDcjhcYhykfiRTNPMSHPGF15TZdGxnnXqY16mWpRjn+//PePIDPbcXSVLoADTbv+0YCO1hTAsqSA1hMw5kyIR8Q4DKrOYwBWHAgK07R48jzUJMO5hT1uwkSuvZP4X9Z/C03igt3eXcnLgWD2eq/gFiD8uzCm5QHQlpZ18Y8uZurssBlCRWMP3aNiEOtOjtl2nrk1PGolA0Bw7LZDNzv/+pLANGvagBWEyUut6ytyU53ptZ3hbnMXJdyj5T2MuUNLnuM/8awCIqaGAW13behX/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////6eABabu/2jAEI5LByMZQVEaASID8gcpN+TX6giBDQJDPGGTkQZDBqUWsre6qBBLe5JoevyzUYUyGCE4aC9fYh2en76VC6pTdfaExiSyivFIbqtLbG6D9uhJHab9/6sMyWMQLewj8Qlsa+gpZa8liXd7bor0Zl1izR71ykr2tY09P9LSYV6fLlu+J0qACik7ta2APDEDnZQDJFJOqdAQO0UY/BAKU006BiiYBVS5NH/hLo6q7f6x5Gia6jiEq3S4e1tKQoVgem041hsUD0HMIy9ivFh6rHZPQf2KqMPgsUYvuxEWo+NLuhqvobAoGZTuqsDM3HBm8FqYUpct8DS4//qSwNAA/4AgJNtNrWsLciadqfWNYW9jthipK81ChRsuUX4fS6iSRNfXpDiV1/u0SX49fpmeA////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7uABqc3/2kABKIEbVCE0NLyW0KosLGKAX72aSq5QSa1mUnU3Zj75/hjqsWAS+11ZUGNXhu5QpkkARRA2S5xrM+/lij7bsvGp+7Z512E7SjxyVShOSRHlhen1H03xI1V6GjrscZrbI8KrbmPCgsHtFl34WvmuPmDX//Has6+/+u3X1/nEKN/nPy1Xk6ACik9bIkAKh3dZkWlL/Cw5mIYQZgINIYFrRGVAwAoCUoi0SPuSLPS33O44ZNxJnaKNVJP3u28LnFNXThvaj1Nn9NBt65Xrc/ed6H8qbV27MyvrzQ3YcbuUut/25d5e3dvZSvH/v6zpKuVcGlGm2keHFYao//6kMDFjP+AIAUdR61l67omo6o1jL120kf////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+SkBROb7WhgAYBriyAfjmAmz0AeVkJ0LeajpC1SIhed5Yicyc7H7f/3m1sF4ajlSxs81jxZCjxNWAMaN05Bhq4+EWucqZbpcs8t6zu2s8a8Ii2Et5n3HDG5ds71d7u1+O9YYZUxor/+o//D9WgEtJy2yAgInOaSglmmQF8LQsE6Yj2LtUtaZKgdK1JSHniOKgh5utreWt4syJi8iwx7bw1ZSDac8XcfWtGZZrnO7RtVpNaVvi5nou3mWaPHt9/HrCtC3XesWprwYuFHf/19fX///////////////////////6ksDmi/+AI/jBQ61nC3Gsl6l0/OFu//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////6dACaUtkbAAGBtq7IsFIclVBJfCXEyygTaopcEBCgUrLGXpOEZh18efjrO4m+YsBTqxDYkXMc7WQiXB9puxneVzb59PnXl/rBrXXxNmLdqAge1szNIdpBMKcjaQABeBg7AFQIBAKFkAiO+gW3R9l1WYC4SChAMu6PG+FLo7Oc/G/kwkiZZnpDYs7wq9hNvmdWsb3HpBWxCb7FfLf//////////////////////////////////////////////////////////////+pLABLz/gCa8v0Gs6etxUxIntY09Lv//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8mBCic/wAC0UVgciEikgrWTihkS4mzenoiQniyqHN5Yidg8tgtzf77rGcAPJcOoM91KNW1a5wK6BCVeRA0dGfa0AAAcLLWyzKwKqj1jRINC9BeqU02ZMKNHocHmbkfpEWbCJgio2ZESIF2VkUEXsko8mw8m65Bb///////////////////////////////////////////////////////////////////////////qSwHlc/4AqLFk3rGcHMOUMZvGMxSb///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////dzAXe3gAAzB582oR6XugCBv8XrKxT1maC5kUhwbQWenYLDslSZyzq61K0rsxapTqAJgFRtqqMwd/AOwAqiAAvDiabHiHUiIZ9LmfHiI70AvL3mPeyV7AntR//////////////////////////////////////////////////////////////////////////////////////////////////////6ksDp6/+AK1BTL+xmJyDBB+TxjGTc/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////4j1kucIAAM6hKL4L8IOFaAPAebjbtqEsL0XYA7SCoo/Yq+SAE1DoZAAA/7xmwaZm2PnSIAkFezyX///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+pLAr6L/gC0EPRyH5ybgi4ekcPfM3P//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1f////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////qSwB6F/4AxPCkjgOFEoAQAYsAAAAT////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////6ksBYY/+AMWABLgAAACAAACXAAAAE////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/+pLAWGP/gDFgAS4AAAAgAAAlwAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    preload="auto"></audio>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+    crossorigin="anonymous"></script>
+  <script src="js/index.js"></script>
+</body>
+
+</html>
